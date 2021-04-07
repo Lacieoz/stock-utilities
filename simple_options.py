@@ -1,14 +1,14 @@
+from check_inputs import check_inputs
+
+
 def calculate_long_call_payoff(strike, price_paid, end_stock_price, contract_size, position_size):
     # casting in case variables are string or something else
-    try:
-        strike = float(strike)
-        price_paid = float(price_paid)
-        end_stock_price = float(end_stock_price)
-        contract_size = float(contract_size)
-        position_size = float(position_size)
-    except ValueError:
-        print("Some input isn't a number")
-        return "InputError"
+
+    err, clean_inputs = check_inputs([strike, price_paid, end_stock_price, contract_size, position_size])
+    if err == "":
+        strike, price_paid, end_stock_price, contract_size, position_size = clean_inputs
+    else:
+        return err
 
     price_diff = max(end_stock_price - strike, 0)
     payoff = price_diff - price_paid
@@ -23,15 +23,11 @@ def calculate_long_call_payoff(strike, price_paid, end_stock_price, contract_siz
 
 def calculate_long_put_payoff(strike, price_paid, end_stock_price, contract_size, position_size):
     # casting in case variables are string or something else
-    try:
-        strike = float(strike)
-        price_paid = float(price_paid)
-        end_stock_price = float(end_stock_price)
-        contract_size = float(contract_size)
-        position_size = float(position_size)
-    except ValueError:
-        print("Some input isn't a number")
-        return "InputError"
+    err, clean_inputs = check_inputs([strike, price_paid, end_stock_price, contract_size, position_size])
+    if err == "":
+        strike, price_paid, end_stock_price, contract_size, position_size = clean_inputs
+    else:
+        return err
 
     price_diff = max(strike - end_stock_price, 0)
     payoff = price_diff - price_paid
@@ -46,15 +42,11 @@ def calculate_long_put_payoff(strike, price_paid, end_stock_price, contract_size
 
 def calculate_long_option_payoff(type, strike, price_paid, end_stock_price, contract_size, position_size):
     # casting in case variables are string or something else
-    try:
-        strike = float(strike)
-        price_paid = float(price_paid)
-        end_stock_price = float(end_stock_price)
-        contract_size = float(contract_size)
-        position_size = float(position_size)
-    except ValueError:
-        print("Some input isn't a number")
-        return "InputError"
+    err, clean_inputs = check_inputs([strike, price_paid, end_stock_price, contract_size, position_size])
+    if err == "":
+        strike, price_paid, end_stock_price, contract_size, position_size = clean_inputs
+    else:
+        return err
 
     # calculate price difference based on option type (call or put)
     if type.lower() == "put" or type.lower() == "p":
@@ -79,15 +71,11 @@ def calculate_long_option_payoff(type, strike, price_paid, end_stock_price, cont
 
 def calculate_short_call_payoff(strike, premium_received, end_stock_price, contract_size, position_size):
     # casting in case variables are string or something else
-    try:
-        strike = float(strike)
-        premium_received = float(premium_received)
-        end_stock_price = float(end_stock_price)
-        contract_size = float(contract_size)
-        position_size = float(position_size)
-    except ValueError:
-        print("Some input isn't a number")
-        return "InputError"
+    err, clean_inputs = check_inputs([strike, premium_received, end_stock_price, contract_size, position_size])
+    if err == "":
+        strike, premium_received, end_stock_price, contract_size, position_size = clean_inputs
+    else:
+        return err
 
     price_diff = max(end_stock_price - strike, 0)
     payoff = premium_received - price_diff
@@ -102,15 +90,11 @@ def calculate_short_call_payoff(strike, premium_received, end_stock_price, contr
 
 def calculate_short_put_payoff(strike, premium_received, end_stock_price, contract_size, position_size):
     # casting in case variables are string or something else
-    try:
-        strike = float(strike)
-        premium_received = float(premium_received)
-        end_stock_price = float(end_stock_price)
-        contract_size = float(contract_size)
-        position_size = float(position_size)
-    except ValueError:
-        print("Some input isn't a number")
-        return "InputError"
+    err, clean_inputs = check_inputs([strike, premium_received, end_stock_price, contract_size, position_size])
+    if err == "":
+        strike, premium_received, end_stock_price, contract_size, position_size = clean_inputs
+    else:
+        return err
 
     price_diff = max(strike - end_stock_price, 0)
     payoff = premium_received - price_diff
@@ -125,15 +109,11 @@ def calculate_short_put_payoff(strike, premium_received, end_stock_price, contra
 
 def calculate_short_option_payoff(type, strike, premium_received, end_stock_price, contract_size, position_size):
     # casting in case variables are string or something else
-    try:
-        strike = float(strike)
-        premium_received = float(premium_received)
-        end_stock_price = float(end_stock_price)
-        contract_size = float(contract_size)
-        position_size = float(position_size)
-    except ValueError:
-        print("Some input isn't a number")
-        return "InputError"
+    err, clean_inputs = check_inputs([strike, premium_received, end_stock_price, contract_size, position_size])
+    if err == "":
+        strike, premium_received, end_stock_price, contract_size, position_size = clean_inputs
+    else:
+        return err
 
     # calculate price difference based on type of option (call or put)
     if type.lower() == "put" or type.lower() == "p":
@@ -158,15 +138,11 @@ def calculate_short_option_payoff(type, strike, premium_received, end_stock_pric
 
 def calculate_option_payoff(type, direction, strike, premium_or_paid, end_stock_price, contract_size, position_size):
     # casting in case variables are string or something else
-    try:
-        strike = float(strike)
-        premium_or_paid = float(premium_or_paid)
-        end_stock_price = float(end_stock_price)
-        contract_size = float(contract_size)
-        position_size = float(position_size)
-    except ValueError:
-        print("Some input isn't a number")
-        return "InputError"
+    err, clean_inputs = check_inputs([strike, premium_or_paid, end_stock_price, contract_size, position_size])
+    if err == "":
+        strike, premium_or_paid, end_stock_price, contract_size, position_size = clean_inputs
+    else:
+        return err
 
     # calculate price difference based on option type (call or put)
     if type.lower() == "put" or type.lower() == "p":
